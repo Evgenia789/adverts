@@ -1,0 +1,55 @@
+{% load static %}
+<header>
+  <nav class="navbar navbar-light" style="background-color: silver">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'advert:index' %}">
+        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span style="color:purple">A</span>dverts</a>
+
+      </a>
+      {% with request.resolver_match.view_name as view_name %}
+      <ul class="nav nav-pills mr-auto">
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'about:us' %}active{% endif %}"
+            href="{% url 'about:us' %}"
+          >
+          <span style="color:purple"> O нас </span>  
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'users:login' %} active {% endif %}"
+            href="{% url 'users:login' %}"
+          >
+          <span style="color:purple">Вход</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'users:signup' %}active{% endif %}"
+            href="{% url 'users:signup' %}"
+          >
+          <span style="color:purple">Регистрация</span>
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:purple">
+              <span style="color:purple">Профиль</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'advert:advert_create' %}">Новая запись</a>
+              <a class="dropdown-item" href="{% url 'users:password_change' %}">Изменить пароль</a>
+              <a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a>
+            </div>
+          </li>
+          <li>
+            Пользователь: {{ user.username }}
+          </li>
+        {% endif %}
+        
+      </ul>
+      {% endwith %}  
+    </div>
+  </nav>      
+</header>

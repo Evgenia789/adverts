@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Adv: Недвижимость, транспорт, вещи{% endblock %}
+
+{% block content %}
+<div class="container">
+  {% include 'advert/includes/main_navigation.html' %}
+  <div class="row">
+    {% include 'advert/advert.html' %}
+  </div>
+  {% include 'advert/includes/paginator.html' %}  
+</div> 
+{% endblock %}        

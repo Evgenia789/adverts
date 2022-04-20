@@ -1,0 +1,13 @@
+<nav class="nav flex-column">
+  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Посмотреть по категориям</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'advert:category_list' slug=category.slug %}">
+      <b><span style="color:black">{{ category }}</span></b>
+    </a>
+    {% for subcategory in subcategories %}
+      {% if category == subcategory.super_category %}
+        <a class="nav-link" href="{% url 'advert:subcategory_list' category=category.slug slug=subcategory.slug %}">
+          <span style="color:black">{{ subcategory.name }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+</nav>

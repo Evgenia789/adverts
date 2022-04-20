@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}{{ advert.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'advert:index' %}">
+          <span style="color:purple">Adverts</span>
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'advert:category_list' slug=advert.main_category.slug %}">
+          <span style="color:purple">{{ advert.main_category.name }}</span>
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'advert:subcategory_list' category=advert.main_category.slug slug=advert.category.slug %}">
+          <span style="color:purple">{{ advert.category.name }}</span>
+        </a>
+      </li>
+    </ol>
+  </nav>
+  <div class="row">
+    <nav class="nav flex-column">
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Посмотреть по категориям</a>
+      <a class="nav-link active" aria-current="page" href="{% url 'advert:category_list' slug=advert.main_category.slug %}">
+        <span style="color:black">{{ advert.main_category.name }}</span>
+      </a>
+      {% for subcategory in subcategories %}
+        {% if advert.main_category == subcategory.super_category %}
+          <a class="nav-link" href="{% url 'advert:subcategory_list' category=advert.main_category.slug slug=subcategory.slug %}">
+            <span style="color:black">{{ subcategory.name }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <section class="col border-0 py-2">
+  <div class="container">
+    <div class="row">
+      <div class="card h-100">
+        {% thumbnail advert.image "960x339" crop="center" upscale=True as im %}
+          <img class="card-img my-2" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}>
+        {% endthumbnail %}
+        <div class="card-body">
+          <h5 class="card-title">{{ advert.title }}</h5>
+          <p class="card-text">{{ advert.description }}</p>
+          <p class="card-text">{{ advert.price }} RUB</p>
+          <p class="card-text">{{ advert.pub_date }}</p>
+          <a href="{% url 'advert:profile' username=advert.author.username %}">
+            <p class="card-text"><span style="color:purple">{{ advert.author }}</span></p>
+          </a>
+          {% if user == advert.author %}
+            <a class="btn btn-secondary" href="{% url 'advert:advert_edit' advert_id=advert.id %}">
+              редактировать объявление
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+ </div>   
+{% endblock %}    

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category }}{% endblock %}
+      
+{% block content %}
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'advert:index' %}">
+          <span style="color:purple">Adverts</span>
+        </a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">{{ category }}</a></li>
+    </ol>
+  </nav>
+  <div class="row">
+    {% include 'advert/includes/category_navigation.html' %}
+    <section class="col border-0 py-2">
+    <div class="container">
+      <div class="row">
+        {% include 'advert/advert.html' %}
+      </div>
+    </div>
+    {% include 'advert/includes/paginator.html' %}
+  </div> 
+</body>    
+{% endblock %}  

@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link btn-sm" href="{% url 'advert:index' %}"><b>Главная</b><span class="sr-only">(текущая)</span></a> 
+        </li>
+        {% for category in categories %}
+        <li class="nav-item dropdown">
+          <a class="nav-link btn-sm dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ category.name }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'advert:category_list' slug=category.slug %}">
+              {{ category.name }}
+            </a>  
+            <div class="dropdown-divider"></div>
+            {% for subcategory in subcategories %}
+            {% if category == subcategory.super_category %}
+              <a class="dropdown-item" href="{% url 'advert:subcategory_list' category=category.slug slug=subcategory.slug %}">{{ subcategory.name }}</a>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="{% url 'advert:search' %}">
+        <input class="form-control mr-sm-2" value="{{ query|escape }}" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+      </form>
+    </div>
+  </nav>
+  <br><br>
