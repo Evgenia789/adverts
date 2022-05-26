@@ -1,30 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}Мои объявления{% endblock %}
+{% block title %}Все товары {{ author }}{% endblock %}
       
 {% block content %}
 <div class="container">
   {% include 'advert/includes/main_navigation.html' %}
   <div class="row">
-   
     <section class="col border-0 py-2">
     <div class="container">
+      <h5>Все товары {{ author }}</h5>
       <div class="row">
-        {% for advert in page_obj %}
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">
-                <a href="{% url 'advert:advert_detail' category=advert.main_category.slug subcategory=advert.category.slug advert_id=advert.id%}">
-                  <span style="color:black">{{ advert.title }}</span>
-                </a>
-              </h5>
-              <p class="card-text">{{ advert.price }} RUB</p>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
+        {% include 'advert/advert.html' %}
       </div>
     </div>
     {% include 'advert/includes/paginator.html' %}

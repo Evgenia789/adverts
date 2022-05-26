@@ -1,19 +1,6 @@
 from django import forms
 
-from .models import Advert, SubCategory, SuperCategory
-
-
-class SubCategoryForm(forms.ModelForm):
-    super_category = forms.ModelChoiceField(
-        queryset=SuperCategory.objects.all(),
-        empty_label=None,
-        label='Категория',
-        required=True
-    )
-
-    class Meta:
-        model = SubCategory
-        fields = '__all__'
+from .models import Advert, Comment
 
 
 class AdvertForm(forms.ModelForm):
@@ -23,20 +10,29 @@ class AdvertForm(forms.ModelForm):
             'title',
             'description',
             'price',
+            'phonenumber',
             'category',
-            'main_category',
+            'subcategory',
             'image'
         )
         labels = {'title': 'Название товара',
                   'description': 'Описание товара',
                   'price': 'Цена товара',
-                  'category': 'Подкатегория',
-                  'main_category': 'Категория'
+                  'phonenumber': 'Номер телефона',
+                  'subcategory': 'Подкатегория',
+                  'category': 'Категория'
                   }
         help_texts = {
             'title': 'Введите название товара',
             'description': 'Введите описание товара',
             'price': 'Введите цену товара',
-            'main_category': 'Выберите категорию',
-            'category': 'Выберите подкатегорию'
+            'phonenumber': 'Введите Ваш номер телефона',
+            'category': 'Выберите категорию',
+            'subategory': 'Выберите подкатегорию'
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)

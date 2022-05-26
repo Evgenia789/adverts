@@ -15,7 +15,7 @@
             </a>  
             <div class="dropdown-divider"></div>
             {% for subcategory in subcategories %}
-            {% if category == subcategory.super_category %}
+            {% if category == subcategory.category %}
               <a class="dropdown-item" href="{% url 'advert:subcategory_list' category=category.slug slug=subcategory.slug %}">{{ subcategory.name }}</a>
             {% endif %}
             {% endfor %}

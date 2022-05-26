@@ -12,32 +12,11 @@
         {% endwith %}
       </h3>
   <div class="row">
-      {% for advert in results %}
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-            <a href="{% url 'advert:advert_detail' category=advert.main_category.slug subcategory=advert.category.slug advert_id=advert.id%}">
-            {% thumbnail advert.image "300" as im %}
-              <img class="card-img my-2" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-            {% endthumbnail %}
-            </a>
-            <div class="card-body">
-              <h5 class="card-title">
-                <a href="{% url 'advert:advert_detail' category=advert.main_category.slug subcategory=advert.category.slug advert_id=advert.id%}">
-                    <span style="color:black">{{ advert.title }}</span>
-                </a>
-              </h5>
-                <p class="card-text">{{ advert.price }} RUB</p>
-            </div>
-          </div>
-        </div>
-      {% empty %}
-        <h3>Результаты не найдены.</h3>
-      {% endfor %}
-    {% endif %}
+    {% include 'advert/advert.html' %}
+  {% endif %}
   </div>
   <form action="{% url 'advert:index' %}" class="form-inline" method="get">
     <button type="submit" class="btn btn-secondary">Назад</button>
   </form>
-  
 </div> 
 {% endblock %}        

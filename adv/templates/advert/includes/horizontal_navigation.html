@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'advert:index' %}">
+          <span style="color:purple">Adverts</span>
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'advert:category_list' slug=category.slug %}">
+          <span style="color:purple">{{ category }}</span>
+        </a>
+      </li>
+      {% if const %}
+        <li class="breadcrumb-item active" aria-current="page">{{ subcategory.name }}</a></li>
+      {% endif %}
+    </ol>
+  </nav> 

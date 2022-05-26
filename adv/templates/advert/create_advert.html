@@ -79,21 +79,20 @@
               </div>
 
               <div class="form-group row my-3 p-3">
-                <label for="{{ form.main_category.id_for_label }}">
-                  {{ form.main_category.label }}                  
+                <label for="{{ form.phonenumber.id_for_label }}">
+                  {{ form.phonenumber.label  }}                  
+                  <span class="required text-danger">*</span>                  
                 </label>
-                <select name="main_category" class="form-control" id="{{ form.main_category.id_for_label }}">
-                {% for field in form.main_category %}
-                  <option value="{{ field.id_for_label }}">{{ field }}</option>
-                {% endfor%}
-                </select>
-                {% if form.main_category.help_text %}  
-                <small id="{{ form.main_category.id_for_label }}-help" class="form-text text-muted">
-                  {{ form.main_category.help_text|safe }}
-                </small>                  
+                <textarea name="phonenumber" class="form-control" required id="{{ form.phonenumber.id_for_label }}">
+                  {{ advert.phonenumber }}
+              </textarea>
+                {% if form.phonenumber.help_text %}
+                  <small id="{{ form.phonenumber.id_for_label }}-help" class="form-text text-muted">
+                    {{ form.phonenumber.help_text|safe }} 
+                  </small>                  
                 {% endif %}
               </div>
-              
+
               <div class="form-group row my-3 p-3">
                 <label for="{{ form.category.id_for_label }}">
                   {{ form.category.label }}                  
@@ -106,6 +105,22 @@
                 {% if form.category.help_text %}  
                 <small id="{{ form.category.id_for_label }}-help" class="form-text text-muted">
                   {{ form.category.help_text|safe }}
+                </small>                  
+                {% endif %}
+              </div>
+              
+              <div class="form-group row my-3 p-3">
+                <label for="{{ form.subcategory.id_for_label }}">
+                  {{ form.subcategory.label }}                  
+                </label>
+                <select name="subcategory" class="form-control" id="{{ form.subcategory.id_for_label }}">
+                {% for field in form.subcategory %}
+                  <option value="{{ field.id_for_label }}">{{ field }}</option>
+                {% endfor%}
+                </select>
+                {% if form.subcategory.help_text %}  
+                <small id="{{ form.subcategory.id_for_label }}-help" class="form-text text-muted">
+                  {{ form.subcategory.help_text|safe }}
                 </small>                  
                 {% endif %}
               </div>

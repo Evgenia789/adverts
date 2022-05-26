@@ -4,7 +4,7 @@
       <b><span style="color:black">{{ category }}</span></b>
     </a>
     {% for subcategory in subcategories %}
-      {% if category == subcategory.super_category %}
+      {% if category == subcategory.category %}
         <a class="nav-link" href="{% url 'advert:subcategory_list' category=category.slug slug=subcategory.slug %}">
           <span style="color:black">{{ subcategory.name }}</span>
         </a>

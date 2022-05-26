@@ -14,6 +14,21 @@ urlpatterns = [
         name='advert_edit'
     ),
     path(
+        'advert/<str:username>/<int:advert_id>/delete/',
+        views.advert_delete,
+        name='advert_delete'
+    ),
+    path(
+        '<str:category>/<str:subcategory>/<int:advert_id>/comment/',
+        views.add_comment,
+        name='add_comment'
+    ),
+    path(
+        '<str:category>/<str:subcategory>/<int:advert_id>/<int:comment_id>/',
+        views.delete_comment,
+        name='delete_comment'
+    ),
+    path(
         '<str:category>/<str:subcategory>/<int:advert_id>/',
         views.advert_detail,
         name='advert_detail'

@@ -1,0 +1,35 @@
+{% load user_filters %}
+
+{% if user.is_authenticated%}
+    <div class="card my-4">
+      <h5 class="card-header">Задайте вопрос продавцу:</h5>
+        <div class="card-body">
+          <form method="post" action="{% url 'advert:add_comment' category=advert.category.slug subcategory=advert.subcategory.slug advert_id=advert.id %}">
+            {% csrf_token %}      
+            <div class="form-group mb-2">
+              {{ form.text|addclass:"form-control" }}
+            </div>
+            <button type="submit" class="btn btn-secondary">Отправить</button>
+          </form>
+        </div>
+    </div>
+{% endif %}
+
+{% for comment in comments %}
+    <div class="media mb-4">
+      <div class="media-body">
+        <h5 class="mt-0">
+          <a href="{% url 'advert:profile' username=advert.author.username %}">
+            <span style="color:purple">{{ comment.author.username }}</span>
+          </a>
+        </h5>
+        <p>
+          {{ comment.text }}
+          {% if comment.author.username == user.username %}
+            <br>
+            <a type="button" class="btn btn-outline-secondary btn-sm" href="{% url 'advert:delete_comment' category=advert.category.slug subcategory=advert.subcategory.slug advert_id=advert.id comment_id=comment.id %}">Удалить сообщение</a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+{% endfor %}  
